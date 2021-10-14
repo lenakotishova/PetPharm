@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All Medicines
+{% endblock %}
+
+{% block body %}
+    {% for medicine in medicines %}
+        <h3>{{ medicine.title }}</h3>
+        <p>
+            {{ medicine.body|truncatewords:5 }}
+        </p>
+        <hr>
+    {% endfor %}
+{% endblock %}
