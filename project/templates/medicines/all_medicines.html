@@ -10,6 +10,7 @@
         <p>
             {{ medicine.body|truncatewords:5 }}
         </p>
+        <a href="{{ medicine.get_absolute_url }}">go to medicine </a><br>
         <hr>
     {% endfor %}
 {% endblock %}
