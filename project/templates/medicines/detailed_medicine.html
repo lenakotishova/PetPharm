@@ -7,8 +7,8 @@
 {% block body %}
     <a href="{% url "project:all_medicines" %}"> Back to all medicines </a>
     <h1>{{ medicine.title }}</h1>
-    <p>{{ medicine.SUPPLIED_TYPE}}</p>
-    <p>{{ medicine.body}}</p>
+    <p>{{ medicine.SUPPLIED_TYPE }}</p>
+    <p>{{ medicine.body }}</p>
     updated: {{ medicine.updated }}
     <a href="{% url "project:share_medicine" medicine.id %}">Share</a>
 

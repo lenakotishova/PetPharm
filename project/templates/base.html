@@ -9,9 +9,11 @@
 </head>
 <body>
 {% if request.user.is_authenticated %}
-        <a href="{% url "project:logout" %}">logout </a><br>
+    <a href="{% url "project:logout" %}">logout </a>
+    <a href="{% url "project:profile" %}">profile </a>
 {% else %}
-        <a href="{% url "project:login" %}">login </a><br>
+    <a href="{% url "project:login" %}">login </a><br>
+    <a href="{% url "project:register" %}">register </a><br>
 {% endif %}
 
 {% block body %}{% endblock %}

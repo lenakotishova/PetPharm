@@ -1,7 +1,12 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-
+from django.shortcuts import redirect
 from . import models
 from . import forms
 
@@ -57,3 +62,25 @@ def share_medicine(request, medicine_id):
     return render(request,
                   'medicines/share.html',
                   {'medicine': medicine, 'form': form, 'sent': sent})
+
+
+def profile(request):
+    return render(request, "profile.html", {'user': request.user})
+
+
+def register(request):
+    if request.method == "POST":
+        form = forms.UserRegistrationForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            new_user = form.save(commit=False)
+            new_user.set_password(cd['password'])
+            new_user.save()
+            models.Profile.objects.create(user=new_user)
+
+            return render(request, "registration_complete.html",
+                          {"user": new_user})
+
+    else:
+        form = forms.UserRegistrationForm()
+    return render(request, "register.html", {'form': form})

@@ -5,6 +5,8 @@ from . import models
 # Register your models here.
 
 # admin.site.register(models.Medicine)
+admin.site.register(models.Profile)
+
 
 @admin.register(models.Medicine)
 class MedicineAdmin(admin.ModelAdmin):
@@ -14,3 +16,4 @@ class MedicineAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     ordering = ('SUPPLIED_TYPE', 'title')
     radio_fields = {"PHARMACY": admin.VERTICAL}
+
