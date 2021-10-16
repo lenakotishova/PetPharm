@@ -1,3 +1,7 @@
 h3 {
     color: green;
 }
+
+hr {
+    border: solid darkblue 1px;
+}
