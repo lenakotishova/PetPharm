@@ -10,4 +10,6 @@
     <p>{{ medicine.SUPPLIED_TYPE}}</p>
     <p>{{ medicine.body}}</p>
     updated: {{ medicine.updated }}
+    <a href="{% url "project:share_medicine" medicine.id %}">Share</a>
+
 {% endblock %}
