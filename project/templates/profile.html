@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block body %}
-<p>{{ user.first_name }}, {{ user.last_name }}</p>
-<p>{{ user.profile.birth }}</p>
-<p> <img src="{{ user.profile.photo.url }}" alt="alt text">
+    <p>{{ user.first_name }}, {{ user.last_name }}</p>
+    <p>{{ user.profile.birth }}</p>
+    <p> <img src="{{ user.profile.photo.url }}" alt="alt text"></p>
+    <a href="{% url "project:edit_profile" %}">edit profile </a>
 
 {% endblock %}

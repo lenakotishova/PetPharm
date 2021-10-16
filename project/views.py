@@ -83,4 +83,25 @@ def register(request):
 
     else:
         form = forms.UserRegistrationForm()
-    return render(request, "register.html", {'form': form})
+        return render(request, "register.html", {'form': form})
+
+
+def edit_profile(request):
+    if request.method == "POST":
+        user_form = forms.UserEditForm(request.POST, instance=request.user)
+        profile_form = forms.ProfileEditForm(request.POST,
+                                             instance=request.user.profile,
+                                             files=request.FILES)
+        if all((user_form.is_valid(), profile_form.is_valid())):
+            user_form.save()
+            if not profile_form.cleaned_data['photo']:
+                profile_form.cleaned_data['photo'] = request.user.profile.photo
+            profile_form.save()
+            return render(request, "profile.html", {'user': request.user})
+
+    else:
+        user_form = forms.UserEditForm(instance=request.user)
+        profile_form = forms.ProfileEditForm(request.POST, instance=request.user.profile)
+
+    return render(request, "edit_profile.html", {'user_form': user_form,
+                                                 'profile_form': profile_form})
