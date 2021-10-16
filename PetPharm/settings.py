@@ -128,8 +128,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # login settings
-LOGIN_URL = '/medicine/login/'
-LOGIN_REDIRECT_URL = '/medicine/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_URL = '/medicine/logout/'
-LOGOUT_REDIRECT_URL = '/medicine/'
+LOGOUT_URL = '/logout/'
+LOGOUT_REDIRECT_URL = '/'
