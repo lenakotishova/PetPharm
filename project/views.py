@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+
 from . import models
 from . import forms
 
@@ -46,7 +48,7 @@ def share_medicine(request, medicine_id):
                                uri=uri,
                                name=cd['name'],
                                comment=cd['comment'],
-            )
+                               )
             send_mail(subject, body, 'admin@my.com', [cd['to_email'], ])
             sent = True
     else:

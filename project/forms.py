@@ -1,4 +1,5 @@
 from django import forms
+from . import models
 
 
 class EmailMedicineForm(forms.Form):
@@ -8,3 +9,7 @@ class EmailMedicineForm(forms.Form):
                               widget=forms.Textarea)
 
 
+class MedicineForm(forms.ModelForm):
+    class Meta:
+        model = models.Medicine
+        fields = ('title', 'body')
