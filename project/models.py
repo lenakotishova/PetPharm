@@ -1,8 +1,9 @@
 from django.db import models
-from django.utils import timezone
+from django_bookmark_base.models import BookmarkModel
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.conf import settings
+from django.utils import timezone
 
 
 # Create your models here.
@@ -29,6 +30,7 @@ class Medicine(models.Model):
         ('Капли', 'Капли'),
         ('Сироп', 'Сироп'),
         ('Аэрозоль', 'Аэрозоль'),
+        ('Другое', 'Другое'),
     ]
 
     SUPPLIED_TYPE = models.CharField(
@@ -58,9 +60,6 @@ class Medicine(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
-    # def __str__(self):
-    #    return self.title
-
     def get_absolute_url(self):
         return reverse('project:detailed_medicine',
                        args=[self.publish.year,
@@ -68,9 +67,13 @@ class Medicine(models.Model):
                              self.publish.day,
                              self.slug])
 
+    class Meta:
+        ordering = ['-updated']
+
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     birth = models.DateTimeField(blank=True, null=True)
     photo = models.ImageField(upload_to="user/%Y/%m/%d", blank=True)
+    is_favorite = models.BooleanField(default=False)

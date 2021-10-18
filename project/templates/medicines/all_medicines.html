@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    {% for medicine in medicines %}
+    {% for medicine in page_object.object_list %}
         <h3>{{ medicine.title }}</h3>
         <p>
-            {{ medicine.body|truncatewords:5 }}
+            {{ medicine.body|truncatewords:15 }}
         </p>
-        <a href="{{ medicine.get_absolute_url }}">go to medicine </a><br>
+        <a href="{{ medicine.get_absolute_url }}"> Подробнее </a><br>
         <hr>
     {% endfor %}
 {% endblock %}

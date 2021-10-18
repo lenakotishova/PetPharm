@@ -1,12 +1,8 @@
-from django.contrib.auth import authenticate
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from django.shortcuts import redirect
+from django.core.paginator import Paginator
+
 from . import models
 from . import forms
 
@@ -20,8 +16,31 @@ BODY = ("{title} at {uri}. {name} shared material with you. "
 
 def all_medicines(request):
     medicines = models.Medicine.objects.all()
+    paginator = Paginator(medicines, 5)
+    page_number = request.GET.get('page', 1)
+    page = paginator.get_page(page_number)
+
+    is_paginated = page.has_other_pages()
+
+    if page.has_previous():
+        prev_url = '?page={}'.format(page.previous_page_number())
+    else:
+        prev_url = ''
+
+    if page.has_next():
+        next_url = '?page={}'.format(page.next_page_number())
+    else:
+        next_url = ''
+
+    context = {
+        'page_object': page,
+        'is_paginated': is_paginated,
+        'next_url': next_url,
+        'prev_url': prev_url,
+    }
+
     return render(request, "medicines/all_medicines.html",
-                  {'medicines': medicines})
+                  context=context)
 
 
 def detailed_medicine(request, y, m, d, slug):
