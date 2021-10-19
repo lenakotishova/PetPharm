@@ -2,9 +2,10 @@ from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.core.paginator import Paginator
-
+from django.db.models import Q
 from . import models
 from . import forms
+from .models import *
 
 # Create your views here.
 
@@ -15,8 +16,15 @@ BODY = ("{title} at {uri}. {name} shared material with you. "
 
 
 def all_medicines(request):
-    medicines = models.Medicine.objects.all()
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        medicines = Medicine.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
+    else:
+        medicines = Medicine.objects.all()
+
     paginator = Paginator(medicines, 5)
+
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
 
