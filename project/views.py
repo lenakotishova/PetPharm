@@ -1,11 +1,14 @@
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.views.generic import View
+
 from . import models
 from . import forms
 from .models import *
+from .forms import MedicineForm
 
 # Create your views here.
 
@@ -59,6 +62,25 @@ def detailed_medicine(request, y, m, d, slug):
                                  slug=slug)
     return render(request, "medicines/detailed_medicine.html",
                   {"medicine": medicine})
+
+
+class MedicineDetail(View):
+    def get(self, request, slug):
+        medicine = Medicine.objects.get(slug__iexact=slug)
+        return render(request, 'medicines/detailed_medicine.html', context={'medicine': medicine})
+
+
+class MedicineCreate(View):
+    def get(self, request):
+        form = MedicineForm()
+        return render(request, 'medicine_create.html', context={'form': form})
+
+    def medicine(self, request):
+        bound_form = MedicineForm(request.POST)
+        if bound_form.is_valid():
+            new_medicine = bound_form.save()
+            return redirect(new_medicine)
+        return render(request, 'medicine_create.html', context={'form': bound_form})
 
 
 def share_medicine(request, medicine_id):

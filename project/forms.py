@@ -1,7 +1,8 @@
 from django import forms
 from . import models
-
+from .models import Medicine
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 class EmailMedicineForm(forms.Form):
@@ -42,3 +43,21 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = ('birth', 'photo')
+
+
+class MedicineForm(forms.ModelForm):
+    class Meta:
+        model = Medicine
+        fields = ['title', 'slug', 'body']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'body': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+        def clean_slug(self):
+            new_slug = self.cleaned_data['slug'].lower()
+
+            if new_slug == 'create':
+                raise ValidationError('Не удалось создать Слаг')
+            return new_slug

@@ -1,7 +1,13 @@
-h3 {
-    color: #003380;
+.nav-item{
+    border: 1px solid #999;
+    border-radius: 2px;
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
 }
 
 hr {
+
     border: solid #003380 5px;
 }
+
