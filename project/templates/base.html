@@ -7,30 +7,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <header>
+<link rel="stylesheet" href="{% static 'style.css' %}" >
 
-        <nav class="navbar navbar-light" style="background-color: #c8a2c8;">
-            <a class="navbar-brand" href="{% url 'project:all_medicines' %}" style="color: #800080">
-                <h1> PetPharm </h1> </a>
-
-            <form class="form-inline my-2 my-lg-0" action="{% url 'project:all_medicines' %}">
-                <input class="form-control mr-sm-2" type="Поиск лекарства" placeholder="Поиск лекарства" aria-label="Поиск лекарства" name="Поиск лекарства по названию или описанию">
-                <button class="btn btn-light" type="submit" style="color: #800080">Поиск</button>
-            </form>
-            {% if request.user.is_authenticated %}
-                <div>
-                    <a href="{% url "project:profile" %}" class="btn btn-light">Мой профиль</a>
-                    <a href="{% url "project:logout" %}" class="btn btn-light">Выйти </a>
-                </div>
+<header>
+    <nav class="navbar navbar-light" style="background-color: #c8a2c8;">
+        <a class="navbar-brand" href="{% url 'project:all_medicines' %}" style="color: #800080">
+            <h1> PetPharm </h1> </a>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'project:all_medicines' %}">
+            <input class="form-control mr-sm-2" type="Поиск лекарства" placeholder="Поиск лекарства" aria-label="Поиск лекарства" name="Поиск лекарства по названию или описанию">
+            <button class="btn btn-light" type="submit" style="color: #800080">Поиск</button>
+        </form>
+        {% if request.user.is_authenticated %}
+            <div>
+                <a href="{% url "project:profile" %}" class="btn btn-light">Мой профиль</a>
+                <a href="{% url "project:logout" %}" class="btn btn-light">Выйти </a>
+            </div>
 
             {% else %}
-                <div>
-                    <a href="{% url "project:login" %}" class="btn btn-light">Войти </a>
-                    <a href="{% url "project:register" %}" class="btn btn-light">Зарегистрироваться </a>
-                </div>
-            {% endif %}
-        </nav>
-    </header>
+            <div>
+                <a href="{% url "project:login" %}" class="btn btn-light">Войти </a>
+                <a href="{% url "project:register" %}" class="btn btn-light">Зарегистрироваться </a>
+            </div>
+        {% endif %}
+    </nav>
+</header>
 </head>
 <body>
 
@@ -76,7 +76,13 @@
     </div>
 </div>
 
+</div>
 
+{% if request.user.is_authenticated and request.user.is_staff %}
+    <div class="admin-panel">
+    <a href="/admin" class="btn btn-danger"> Admin</a>
+    {% block admin-panel %} {% endblock %}
+{% endif %}
 </div>
 </body>
 </html>

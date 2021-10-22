@@ -6,14 +6,14 @@
 
 {% block body %}
     {% if not sent %}
-        <h1>Share {{ medicine.title}} via email</h1>
+        <h1>Поделиться {{ medicine.title}} по электронной почте</h1>
         <form action="." method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <input type="submit" value="Share!">
+            <input type="submit" value="Share!" class="btn btn-light">
         </form>
     {% else %}
         Email has been sent.
     {% endif %}
-    <a href="{% url "project:all_medicines" %}"> Back to all medicines </a>
+    <a href="{% url "project:all_medicines" %}"> Ко всем материалам </a>
 {% endblock %}

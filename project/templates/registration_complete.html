@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Hi {{ user.first_name }}</h1>
+    <div class="alert alert-success" role="alert">
+        <h1>Hi {{ user.first_name }}</h1>
+        Вы были успешно зарегистрированы. Теперь вы можете
+        <a href="{% url "project:login" %}">войти в профиль </a><br>
+    </div>
 
-    You've been registered. Now you can
-    <a href="{% url "project:login" %}">login </a><br>
-
-<a href="{% url "project:all_medicines" %}"> Back to all medicines </a>
+<a href="{% url "project:all_medicines" %}" class="btn btn-light"> Все препараты </a>
 {% endblock %}

@@ -7,7 +7,27 @@
 }
 
 hr {
-
     border: solid #003380 5px;
 }
+
+.admin-panel {
+    border: 1px solid #999;
+    border-radius: 2px;
+    position: fixed;
+    right: 50px;
+    bottom: 20px;
+    opacity: 0.3;
+    padding: 10px;
+
+}
+
+.admin-panel a {
+    display: block;
+    margin: 5px;
+}
+
+.admin-panel:hover{
+    opacity: 1;
+}
+
 

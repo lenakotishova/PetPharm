@@ -8,12 +8,8 @@
 {% block body %}
         <h1>Зарегистрироваться</h1>
         <form action="." method="post">
-            {{ form.as_p }}
-            <div class="form.as_p">
-              <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-
-            </div>
+            {{ form|crispy }}
             {% csrf_token %}
-            <input type="submit" value="Register!">
+            <input type="submit" value="Зарегистрироваться!" class="btn btn-light">
         </form>
 {% endblock %}
