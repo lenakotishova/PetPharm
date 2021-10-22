@@ -77,4 +77,3 @@ class Profile(models.Model):
     birth = models.DateTimeField(blank=True, null=True)
     photo = models.ImageField(upload_to="user/%Y/%m/%d", blank=True)
 
-

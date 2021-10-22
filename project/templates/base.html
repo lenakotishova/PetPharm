@@ -6,25 +6,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>{% block title %} PetPharm {% endblock %}</title>
-<link href="{% static "style.css" %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <header>
 
+        <nav class="navbar navbar-light" style="background-color: #c8a2c8;">
+            <a class="navbar-brand" href="{% url 'project:all_medicines' %}" style="color: #800080">
+                <h1> PetPharm </h1> </a>
+
+            <form class="form-inline my-2 my-lg-0" action="{% url 'project:all_medicines' %}">
+                <input class="form-control mr-sm-2" type="Поиск лекарства" placeholder="Поиск лекарства" aria-label="Поиск лекарства" name="Поиск лекарства по названию или описанию">
+                <button class="btn btn-light" type="submit" style="color: #800080">Поиск</button>
+            </form>
+            {% if request.user.is_authenticated %}
+                <div>
+                    <a href="{% url "project:profile" %}" class="btn btn-light">Мой профиль</a>
+                    <a href="{% url "project:logout" %}" class="btn btn-light">Выйти </a>
+                </div>
+
+            {% else %}
+                <div>
+                    <a href="{% url "project:login" %}" class="btn btn-light">Войти </a>
+                    <a href="{% url "project:register" %}" class="btn btn-light">Зарегистрироваться </a>
+                </div>
+            {% endif %}
+        </nav>
+    </header>
 </head>
 <body>
-<header>
-{% if request.user.is_authenticated %}
-<a href="{% url "project:logout" %}">Выйти </a>
-<a href="{% url "project:profile" %}">Мой профиль </a>
-{% else %}
-<a href="{% url "project:login" %}">Войти </a><br>
-<a href="{% url "project:register" %}">Зарегистрироваться </a><br>
-{% endif %}
-</header>
-
-<div class="p-3 mb-2 bg-info text-dark">
-<p class="fst-italic">PetPharm</p>
-</div>
 
 
 <div class="container-flex mt-5">
@@ -67,6 +75,7 @@
 
     </div>
 </div>
+
 
 </div>
 </body>

@@ -1,11 +1,12 @@
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
+from .views import *
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
+
 
 class MyHackedView(auth_views.PasswordResetView):
     success_url = reverse_lazy('project:password_reset_done')
@@ -14,10 +15,10 @@ class MyHackedView(auth_views.PasswordResetView):
 app_name = 'project'
 
 urlpatterns = [
-    path('', views.all_medicines, name='all_medicines'),
-    path('<int:y>/<int:m>/<int:d>/<slug:slug>/', views.detailed_medicine,
+    path('', all_medicines, name='all_medicines'),
+    path('<int:y>/<int:m>/<int:d>/<slug:slug>/', detailed_medicine,
          name='detailed_medicine'),
-    path('<int:medicine_id>/share/', views.share_medicine, name='share_medicine'),
+    path('<int:medicine_id>/share/', share_medicine, name='share_medicine'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
@@ -27,9 +28,9 @@ urlpatterns = [
         success_url=reverse_lazy('project:password_reset_complete'),
     ), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-    path('profile/', views.profile, name='profile'),
-    path('register/', views.register, name='register'),
-    path('edit_profile/', views.edit_profile, name='edit_profile'),
+    path('profile/', profile, name='profile'),
+    path('register/', register, name='register'),
+    path('edit_profile/', edit_profile, name='edit_profile'),
 
 ]
 

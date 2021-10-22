@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Login page
@@ -10,14 +11,14 @@
         Пользователь не найден и/или пароль введен не верно
     {% else %}
         <form action="." method="post">
-            {{ form.as_p }}
+            {{ form|crispy }}
             {% csrf_token %}
-            <input type="hidden" name="next" value="{{ next }}">
-            <input type="submit" value="Войти">
-        </form>
-        <a href="{% url "project:password_reset" %}"> Забыли пароль? </a>
-    {% endif %}
-    <ul>
 
-    </ul>
+        </form>
+
+    {% endif %}
+    <a class="dropdown-item" href="{% url "project:register" %}">Зарегистрироваться</a>
+        <a class="dropdown-item" href="{% url "project:password_reset" %}"> Забыли пароль? </a>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn btn-light">Войти</button>
 {% endblock %}

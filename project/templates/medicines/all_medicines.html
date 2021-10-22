@@ -6,11 +6,13 @@
 
 {% block body %}
     {% for medicine in page_object.object_list %}
-        <h3>{{ medicine.title }}</h3>
-        <p>
-            {{ medicine.body|truncatewords:15 }}
-        </p>
-        <a href="{{ medicine.get_absolute_url }}"> Подробнее </a><br>
-        <hr>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">{{ medicine.title }}</h2>
+                <p class="card-text">    {{ medicine.body|truncatewords:15 }}  </p>
+                <a href="{{ medicine.get_absolute_url }} " class="btn btn-light"> Подробнее </a><br>
+            </div>
+        </div>
+        <br>
     {% endfor %}
 {% endblock %}
