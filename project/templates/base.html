@@ -14,7 +14,7 @@
         <a class="navbar-brand" href="{% url 'project:all_medicines' %}" style="color: #800080">
             <h1> PetPharm </h1> </a>
         <form class="form-inline my-2 my-lg-0" action="{% url 'project:all_medicines' %}">
-            <input class="form-control mr-sm-2" type="Поиск лекарства" placeholder="Поиск лекарства" aria-label="Поиск лекарства" name="Поиск лекарства по названию или описанию">
+            <input class="form-control mr-sm-2" type="Поиск лекарства" placeholder="Поиск лекарства" aria-label="Поиск лекарства" name="search">
             <button class="btn btn-light" type="submit" style="color: #800080">Поиск</button>
         </form>
         {% if request.user.is_authenticated %}
