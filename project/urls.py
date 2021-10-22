@@ -1,10 +1,11 @@
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
-from django.urls import path, include
-from .views import *
-from . import views
+from django.views.generic import TemplateView
+from django.contrib.auth.views import LogoutView
 
 class MyHackedView(auth_views.PasswordResetView):
     success_url = reverse_lazy('project:password_reset_done')
@@ -16,7 +17,6 @@ urlpatterns = [
     path('', views.all_medicines, name='all_medicines'),
     path('<int:y>/<int:m>/<int:d>/<slug:slug>/', views.detailed_medicine,
          name='detailed_medicine'),
-    path('create/', MedicineCreate.as_view(), name='create_medicine'),
     path('<int:medicine_id>/share/', views.share_medicine, name='share_medicine'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

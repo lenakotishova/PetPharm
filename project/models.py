@@ -76,3 +76,5 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE)
     birth = models.DateTimeField(blank=True, null=True)
     photo = models.ImageField(upload_to="user/%Y/%m/%d", blank=True)
+
+

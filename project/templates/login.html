@@ -5,10 +5,20 @@
 {% endblock %}
 
 {% block body %}
-        <h1>User login:</h1>
+    <h1> Вход на сайт </h1>
+    {% if form.errors %}
+        Пользователь не найден и/или пароль введен не верно
+    {% else %}
         <form action="." method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <input type="submit" value="Login">
+            <input type="hidden" name="next" value="{{ next }}">
+            <input type="submit" value="Войти">
         </form>
+        <a href="{% url "project:password_reset" %}"> Забыли пароль? </a>
+    {% endif %}
+    <ul>
+
+    <li><a href="{% url 'social:begin' 'facebook' %}"> Sign in with Facebook </a></li>
+    </ul>
 {% endblock %}

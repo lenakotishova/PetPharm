@@ -1,14 +1,11 @@
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.db.models import Q
-from django.views.generic import View
+from django.shortcuts import redirect
 
 from . import models
 from . import forms
-from .models import *
-from .forms import MedicineForm
 
 # Create your views here.
 
@@ -19,15 +16,8 @@ BODY = ("{title} at {uri}. {name} shared material with you. "
 
 
 def all_medicines(request):
-    search_query = request.GET.get('search', '')
-
-    if search_query:
-        medicines = Medicine.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
-    else:
-        medicines = Medicine.objects.all()
-
+    medicines = models.Medicine.objects.all()
     paginator = Paginator(medicines, 5)
-
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
 
@@ -62,25 +52,6 @@ def detailed_medicine(request, y, m, d, slug):
                                  slug=slug)
     return render(request, "medicines/detailed_medicine.html",
                   {"medicine": medicine})
-
-
-class MedicineDetail(View):
-    def get(self, request, slug):
-        medicine = Medicine.objects.get(slug__iexact=slug)
-        return render(request, 'medicines/detailed_medicine.html', context={'medicine': medicine})
-
-
-class MedicineCreate(View):
-    def get(self, request):
-        form = MedicineForm()
-        return render(request, 'medicine_create.html', context={'form': form})
-
-    def medicine(self, request):
-        bound_form = MedicineForm(request.POST)
-        if bound_form.is_valid():
-            new_medicine = bound_form.save()
-            return redirect(new_medicine)
-        return render(request, 'medicine_create.html', context={'form': bound_form})
 
 
 def share_medicine(request, medicine_id):
@@ -132,7 +103,7 @@ def register(request):
 
     else:
         form = forms.UserRegistrationForm()
-        return render(request, "register.html", {'form': form})
+    return render(request, "register.html", {'form': form})
 
 
 def edit_profile(request):
