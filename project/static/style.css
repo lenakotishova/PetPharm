@@ -30,3 +30,8 @@ hr {
     opacity: 1;
 }
 
+.edit-button {
+    right: 60px;
+    bottom: 20px;
+    padding: 10px;
+}
