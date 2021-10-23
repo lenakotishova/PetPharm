@@ -1,13 +1,14 @@
 import form as form
 from django.contrib import admin
-from django.forms import forms
 
+from .models import Profile
 from . import models
-
 
 # Register your models here.
 
 # admin.site.register(models.Medicine)
+
+
 admin.site.register(models.Profile)
 
 

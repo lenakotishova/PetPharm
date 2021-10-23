@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
+from PIL import Image
 
 
 # Create your models here.
@@ -76,4 +77,3 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE)
     birth = models.DateTimeField(blank=True, null=True)
     photo = models.ImageField(upload_to="user/%Y/%m/%d", blank=True)
-

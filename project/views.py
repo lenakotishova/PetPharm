@@ -88,7 +88,6 @@ def share_medicine(request, medicine_id):
                   'medicines/share.html',
                   {'medicine': medicine, 'form': form, 'sent': sent})
 
-
 def profile(request):
     return render(request, "profile.html", {'user': request.user})
 

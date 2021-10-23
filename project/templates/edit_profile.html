@@ -1,15 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
 
 {% block title %}
     Edit profile
 {% endblock %}
 
 {% block body %}
-        <h1>You can edit your data:</h1>
-        <form action="." method="post" enctype="multipart/form-data">
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            {% csrf_token %}
-            <input type="submit" value="Update">
-        </form>
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img src="{{ user.profile.photo.url }}" alt="alt text" class="rounded float-left d-block">
+                    <span class="font-weight-bold">
+                        {{ user.first_name }}
+                    </span>
+                    <span class="text-black-50">
+                        {{ user.email}}
+                    </span>
+                    <span> </span>
+                </div>
+            </div>
+             <div class="col-md-9">
+                 <div class="p-3 py-5">
+                     <div class="d-flex align-items-right mb-3">
+                         <h4 class="text-right">Редактирование профиля</h4>
+                     </div>
+                <div class="row mt-2">
+                    <form action="." method="post" enctype="multipart/form-data">
+                        {{ user_form.as_p }}
+                        {{ profile_form.as_p }}
+                        {% csrf_token %}
+                        <input type="submit" value="Изменить" class="btn btn-light">
+
+                    </form>
+                </div>
+             </div>
+        </div>
 {% endblock %}

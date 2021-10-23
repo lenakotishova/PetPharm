@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
+
 
 {% block title %}
     Profile
 {% endblock %}
 
+{% block image %}
+{% endblock %}
 {% block body %}
     <p>{{ user.first_name }}, {{ user.last_name }}</p>
     <p>{{ user.profile.birth }}</p>
-    <p> <img src="{{ user.profile.photo.url }}" alt="alt text" class="mt-0"></p>
+
+        <p> <img src="{{ user.profile.photo.url }}" alt="alt text" class="rounded float-left d-block"></p>
+
     <a href="{% url "project:edit_profile" %}">edit profile </a>
 
 {% endblock %}
