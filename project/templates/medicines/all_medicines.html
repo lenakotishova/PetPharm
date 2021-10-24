@@ -16,4 +16,36 @@
         </div>
         <br>
     {% endfor %}
+    <div class="container-flex mt-5" >
+        <div class="row" >
+            <div class="col-6 offset-md-2" >
+                {% if is_paginated %}
+                    <nav aria-label="Page navigation example" >
+                    <ul class="pagination" >
+                        <li class="page-item {% if not prev_url %} disabled {% endif %}"  >
+                            <a class="page-link" href="{{prev_url }}" tabelindex="-1">Предыдущая</a>
+                        </li>
+                        {% for n in page_object.paginator.page_range %}
+                            {% if page_object.number == n %}
+                                <li class="page-item active">
+                                    <a class="page-link" href="?page={{ n }}" >{{ n }}
+                                        <span class="sr-only">(current)</span></a>
+                                </li>
+                            {% elif n > page_object.number|add:-3 and page_object.number|add:3 %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ n }}" >{{ n }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="page-item {% if not next_url %} disabled {% endif %}">
+                            <a class="page-link" href="{{next_url }}" tabelindex="-1" >Следуюшая</a>
+                        </li>
+                    </ul>
+                {% endif %}
+                <h4 class="map - right">Аптеки</h4><br>
+                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4432f6a6f9f33dbd10155c758e77ead2ddf1a17ab393eee4c7d1663bba5b9376&amp;width=654&amp;height=561&amp;lang=ru_RU&amp;scroll=true"></script>        </div>
+        </div>
+    </div>
+    </div>
+    </div>
 {% endblock %}

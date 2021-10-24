@@ -6,6 +6,8 @@ from django.shortcuts import redirect
 from . import models
 from . import forms
 from django.db.models import Q
+from datetime import datetime, timedelta
+
 # Create your views here.
 
 SUBJECT = '{name} Wants to share material "{title}" with you.'
@@ -24,7 +26,6 @@ def all_medicines(request):
     paginator = Paginator(medicines, 5)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
-
 
     is_paginated = page.has_other_pages()
 
@@ -88,6 +89,7 @@ def share_medicine(request, medicine_id):
                   'medicines/share.html',
                   {'medicine': medicine, 'form': form, 'sent': sent})
 
+
 def profile(request):
     return render(request, "profile.html", {'user': request.user})
 
@@ -129,3 +131,5 @@ def edit_profile(request):
 
     return render(request, "edit_profile.html", {'user_form': user_form,
                                                  'profile_form': profile_form})
+
+

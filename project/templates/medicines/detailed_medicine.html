@@ -8,9 +8,11 @@
     <a href="{% url "project:all_medicines" %}" class="btn btn-light"> Ко всем препаратам </a>
     <h1>{{ medicine.title }}</h1>
     <p>{{ medicine.SUPPLIED_TYPE }}</p>
+
     <p>{{ medicine.body }}</p>
+
+    <h5> В наличии:  {{ medicine.PHARMACY }} </h5>
     Последнее обновление: {{ medicine.updated }}
     <a href="{% url "project:share_medicine" medicine.id %}" class="btn btn-light">Share</a>
-
 
 {% endblock %}
