@@ -6,10 +6,13 @@ from django.contrib.auth.models import User
 from . import models
 from . import forms
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
 SUBJECT = '{name} Wants to share material "{title}" with you.'
+
 BODY = ("{title} at {uri}. {name} shared material with you. "
         "Please take"  "a look at it. {name} has provided "
         "next comment: {comment} ")
@@ -49,6 +52,7 @@ def all_medicines(request):
                   context=context)
 
 
+@login_required
 def detailed_medicine(request, y, m, d, slug):
     medicine = get_object_or_404(models.Medicine,
                                  publish__year=y,

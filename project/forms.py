@@ -41,7 +41,7 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = models.Profile
-        fields = ('birth', 'photo',)
+        fields = ('birth', 'photo')
 
 
 class MedicineForm(forms.ModelForm):

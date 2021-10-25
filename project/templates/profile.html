@@ -12,10 +12,11 @@
         <div class="row">
             <div class="col-md-3 right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                   {% if photo %}
-                        <p> </p>
+                   {% if user.profile.photo %}
+                       <img src="{{ user.profile.photo.url }}" alt="Нет фото" class="rounded float-left d-block">
+
                     {% else %}
-                        <img src="{{ user.profile.photo.url }}" alt="Нет фото" class="rounded float-left d-block">
+                       <p> </p>
                     {% endif %}
                     <span class="font-weight-bold">
                         {{ user.first_name }}
@@ -33,7 +34,6 @@
                      </div>
                      <div class="information">
                          <p> Имя: {{ user.first_name }} </p>
-                         <p> Фамилия: {{ user.last_name }}</p>
                          <p> Адрес электронной почты: {{ user.email }}</p>
                          <p> Дата рождения: {{ user.profile.birth }}</p>
                      </div>

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Share Medicine
@@ -8,12 +9,12 @@
     {% if not sent %}
         <h1>Поделиться {{ medicine.title}} по электронной почте</h1>
         <form action="." method="post">
-            {{ form.as_p }}
+            {{ form | crispy }}
             {% csrf_token %}
-            <input type="submit" value="Share!" class="btn btn-light">
+            <input type="submit" value="Поделиться!" class="btn btn-light">
         </form>
     {% else %}
-        Email has been sent.
+        Письмо было отправлено.
     {% endif %}
-    <a href="{% url "project:all_medicines" %}"> Ко всем материалам </a>
+    <a href="{% url "project:all_medicines" %}" class="btn btn-light"> Ко всем материалам </a>
 {% endblock %}

@@ -13,10 +13,10 @@
         <div class="row">
             <div class="col-md-3 right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    {% if photo %}
-                        <p> </p>
-                    {% else %}
+                    {% if user.profile.photo %}
                         <img src="{{ user.profile.photo.url }}" alt="Нет фото" class="rounded float-left d-block">
+                    {% else %}
+                        <p> </p>
                     {% endif %}
                     <p><img src="{{post.image.url}}"></p>
                     <span class="font-weight-bold">

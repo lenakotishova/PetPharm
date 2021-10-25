@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="alert alert-success" role="alert">
-        <h1>Hi {{ user.first_name }}</h1>
+        <h1>Добро пожаловать {{ user.first_name }}</h1>
         Вы были успешно зарегистрированы. Теперь вы можете
         <a href="{% url "project:login" %}">войти в профиль </a><br>
     </div>

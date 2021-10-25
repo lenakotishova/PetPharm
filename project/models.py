@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import DecimalField
 from django_bookmark_base.models import BookmarkModel
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -77,3 +78,5 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE)
     birth = models.DateTimeField(blank=True, null=True)
     photo = models.ImageField(blank=True, upload_to="user/%Y/%m/%d")
+
+
