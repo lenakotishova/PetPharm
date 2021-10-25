@@ -4,14 +4,13 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
-from PIL import Image
 
 
 # Create your models here.
 
 
 class Medicine(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, verbose_name='Заголовок')
     slug = models.SlugField(max_length=255,
                             unique_for_date='publish')
 
@@ -35,6 +34,7 @@ class Medicine(models.Model):
     ]
 
     SUPPLIED_TYPE = models.CharField(
+        verbose_name='Тип',
         max_length=100,
         choices=SUPPLIED_TYPE,
         default='Не указано'
@@ -49,6 +49,7 @@ class Medicine(models.Model):
     ]
 
     PHARMACY = models.CharField(
+        verbose_name='Аптека',
         max_length=500,
         choices=PHARMACY,
         default='Нет в наличии'
@@ -56,10 +57,9 @@ class Medicine(models.Model):
 
     body = models.TextField()
 
-    publish = models.DateTimeField(default=timezone.now)
+    publish = models.DateTimeField(default=timezone.now, verbose_name='Добавлено')
 
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
 
     def get_absolute_url(self):
         return reverse('project:detailed_medicine',

@@ -2,11 +2,10 @@ from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.shortcuts import redirect
+from django.contrib.auth.models import User
 from . import models
 from . import forms
 from django.db.models import Q
-from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -133,3 +132,21 @@ def edit_profile(request):
                                                  'profile_form': profile_form})
 
 
+def create_medicine(request):
+    if request.method == "POST":
+        medicine_form = forms.MedicineForm(request.POST)
+        if medicine_form.is_valid():
+            new_medicine = medicine_form.save(commit=False)
+            new_medicine.author = User.objects.first()
+            new_medicine.slug = new_medicine.title.replace(" ", "-")
+            new_medicine.save()
+
+            return render(request, "medicines/detailed_medicine.html",
+                          {"medicine": new_medicine})
+
+    else:
+        medicine_form = forms.MedicineForm()
+
+    return render(request,
+                  'medicines/create.html',
+                  {'form': medicine_form})

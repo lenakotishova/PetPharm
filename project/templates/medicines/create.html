@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Create medicine
+{% endblock %}
+
+{% block body %}
+        <h1>Добавление нового препарата</h1>
+        <form action="." method="post">
+            {{ form | crispy}}
+            {% csrf_token %}
+            <input type="submit" value="Создать" class="btn btn-light">
+        </form>
+{% endblock %}

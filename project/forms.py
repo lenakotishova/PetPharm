@@ -42,3 +42,9 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = ('birth', 'photo',)
+
+
+class MedicineForm(forms.ModelForm):
+    class Meta:
+        model = models.Medicine
+        fields = ('title', 'body', 'SUPPLIED_TYPE', 'PHARMACY')

@@ -68,6 +68,7 @@
 {% if request.user.is_authenticated and request.user.is_staff %}
     <div class="admin-panel">
     <a href="/admin" class="btn btn-danger"> Admin</a>
+    <a href="{% url "project:create_medicine" %}" class="btn btn-danger"> Create new material </a>
     {% block admin-panel %} {% endblock %}
 {% endif %}
 </div>
